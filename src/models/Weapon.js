@@ -4,6 +4,7 @@ class Weapon extends Model {
 
     static init(sequelize) {
         super.init({
+            weapon_id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
             weapon_name: DataTypes.STRING,
             damage: DataTypes.INTEGER,
             recoil: DataTypes.INTEGER,
