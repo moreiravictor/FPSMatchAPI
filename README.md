@@ -1,6 +1,6 @@
 # FPSMatchAPI
 
-FPSMatchAPI is an API which provides some information about an fps match.
+FPSMatchAPI is an API which provides some information about an FPS match.
 
 ## Install:
 
@@ -11,7 +11,7 @@ FPSMatchAPI is an API which provides some information about an fps match.
 
 
 #### Start the Mysql service: 
-#### Then, create a user. If you don't want to tweak up the config files, create a user named 'admin'.
+Then, create a user. If you don't want to tweak up the config files, create a user named 'admin'.
 
 #### Go to the root folder and run the DB Migrations.
  ```bash
