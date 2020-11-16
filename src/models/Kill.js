@@ -1,4 +1,3 @@
-const sequelize = require('sequelize');
 const { Model, DataTypes } = require('sequelize');
 
 class Kill extends Model {
@@ -7,7 +6,11 @@ class Kill extends Model {
             kill_id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
             kill_name: DataTypes.STRING,
             point_amount: DataTypes.INTEGER
-        }, sequelize)
+        }, {sequelize})
+    }
+
+    static associate(models) {
+        this.hasMany(models.PlayerKillMatch, {foreignKey: 'kill_id', as: 'players_kills_matches'});
     }
 }
 module.exports = Kill;
