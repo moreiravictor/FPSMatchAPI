@@ -1,16 +1,13 @@
 const PlayerTeamMatch = require("../models/PlayerTeamMatch");
 const PlayerTeamMatchQuery = require("../query/PlayerTeamMatchQuery");
 
-async function findMatchBestPlayer(params) {
-    const { match_id } = params;
+async function findMatchBestPlayer(match_id) {
     const players_kills = await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.playerKills(match_id));
     const best_player = findBestPlayer(players_kills);
     return best_player;
 }
 
-async function findTeamsBestPlayers(params) {
-    const { match_id } = params;
-
+async function findTeamsBestPlayers(match_id) {
     const players_kills_CT = await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.playerKillsTeam(match_id, 1));
     const players_kills_TR = await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.playerKillsTeam(match_id, 2));
 
@@ -20,11 +17,15 @@ async function findTeamsBestPlayers(params) {
     return {counter_terrorists: best_player_CT , terrorists: best_player_TR};
 }
 
-async function findTeamPlayers(params) {
-    const { match_id } = params;
+async function findTeamsPlayers(match_id) {
     const players_CT = (await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.teamPlayers(match_id, 1))).map(p => p.player_data);
     const players_TR = (await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.teamPlayers(match_id, 2))).map(p => p.player_data);
     return {counter_terrorists: players_CT , terrorists: players_TR};
+}
+
+async function findTeam(match_id, team_id) {
+    const players = (await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.teamPlayers(match_id, team_id))).map(p => p.player_data);
+    return players;
 }
 
 const findBestPlayer = (players_kills) => {
@@ -47,5 +48,6 @@ function sumPoints(kills) {
 module.exports = {
     findMatchBestPlayer,
     findTeamsBestPlayers,
-    findTeamPlayers
+    findTeam,
+    findTeamsPlayers
 }
