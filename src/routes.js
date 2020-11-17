@@ -1,6 +1,5 @@
 const express = require('express');
 const KillController = require('./controllers/KillController');
-const PlayerKillMatchController = require('./controllers/PlayerKillMatchController');
 const PlayerTeamMatchController = require('./controllers/PlayerTeamMatchController');
 const TeamsController = require('./controllers/TeamController');
 const WeaponController = require('./controllers/WeaponController');
@@ -12,7 +11,7 @@ routes.get('/weapons', WeaponController.get);
 routes.get('/teams', TeamsController.getTeamDomains);
 routes.get('/kills', KillController.getKillPoints);
 
-routes.get('/match/players', PlayerTeamMatchController.get);
-routes.get('/match/best_player/:match_id', PlayerTeamMatchController.getBestPlayer);
+routes.get('/match/best_player/:match_id', PlayerTeamMatchController.getMatchBestPlayer);
+routes.get('/match/team/best_player/:match_id', PlayerTeamMatchController.getMatchTeamsBestPlayers);
 
 module.exports = routes;
