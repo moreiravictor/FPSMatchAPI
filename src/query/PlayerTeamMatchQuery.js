@@ -38,7 +38,15 @@ const playerKillsTeam = (match_id, team_id) => {
         ]
     }
 };
+
+const teamPlayers = (match_id, team_id) => {
+    return {
+        where: {match_id: match_id, team_id: team_id},
+        include: {association: 'player_data'}
+    }
+}
 module.exports = {
     playerKills,
-    playerKillsTeam
+    playerKillsTeam,
+    teamPlayers
 }
