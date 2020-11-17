@@ -2,12 +2,19 @@ const PlayerTeamMatchService = require('../service/PlayerTeamMatchService');
 
 module.exports = {
     async getMatchBestPlayer(req, res) {
-        const best_player = await PlayerTeamMatchService.findMatchBestPlayer(req.params);
+        const { match_id } = req.params;
+        const best_player = await PlayerTeamMatchService.findMatchBestPlayer(match_id);
         return res.json(best_player);
     },
     async getMatchTeamsBestPlayers(req, res) {
-        const best_players = await PlayerTeamMatchService.findTeamsBestPlayers(req.params);
+        const { match_id } = req.params;
+        const best_players = await PlayerTeamMatchService.findTeamsBestPlayers(match_id);
         return res.json(best_players);
+    },
+    async getMatchTeams(req, res) {
+        const { match_id } = req.params;
+        const teams = await PlayerTeamMatchService.findTeamsPlayers(match_id);
+        return res.json(teams);
     }
 
 };
