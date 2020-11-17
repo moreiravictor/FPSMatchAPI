@@ -39,7 +39,7 @@ class PlayerTeamMatch extends Model {
 
     static associate(models) {
         this.belongsTo(models.Match, {foreignKey: 'match_id', targetKey: 'match_id',as: 'matches'});
-        this.belongsTo(models.Player, {foreignKey: 'player_id', targetKey: 'player_id',as: 'players'});
+        this.belongsTo(models.Player, {foreignKey: 'player_id', targetKey: 'player_id',as: 'player_data'});
         this.belongsTo(models.Team, {foreignKey: 'team_id', targetKey: 'team_id',as: 'teams'});
     }
 }
