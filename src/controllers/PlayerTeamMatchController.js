@@ -1,17 +1,13 @@
-const PlayerTeamMatch = require('../models/PlayerTeamMatch');
-const PlayerTeamMatchQuery = require('../query/PlayerTeamMatchQuery');
 const PlayerTeamMatchService = require('../service/PlayerTeamMatchService');
 
 module.exports = {
-    async get(req, res) {
-        const playerTeamMatch = await PlayerTeamMatch.findAll({include: {association: 'player_data'}});
-        return res.json(playerTeamMatch);
-    }, 
-    async getBestPlayer(req, res) {
-        const { match_id } = req.params;
-        const players_kills = await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.playerKills(match_id));
-        const best_player = PlayerTeamMatchService.findBestPlayer(players_kills);
+    async getMatchBestPlayer(req, res) {
+        const best_player = await PlayerTeamMatchService.findMatchBestPlayer(req.params);
         return res.json(best_player);
+    },
+    async getMatchTeamsBestPlayers(req, res) {
+        const best_players = await PlayerTeamMatchService.findTeamsBestPlayers(req.params);
+        return res.json(best_players);
     }
 
 };
