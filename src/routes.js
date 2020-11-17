@@ -18,5 +18,6 @@ routes.get('/match/teams/best_player/:match_id', PlayerTeamMatchController.getMa
 routes.get('/match/teams/:match_id', PlayerTeamMatchController.getMatchTeams);
 routes.get('/match/winner/:match_id', MatchController.getWinnerTeam);
 routes.get('/match/headshots/:match_id', PlayerKillMatchController.getHeadShots);
+routes.get('/match/rank/:match_id', PlayerTeamMatchController.getRank);
 
 module.exports = routes;

@@ -28,6 +28,18 @@ async function findTeam(match_id, team_id) {
     return players;
 }
 
+async function findRank(match_id) {
+    const players = await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.playerKills(match_id));
+    let players_points = players.map(p => getPointsInfo(p));
+    organizeRank(players_points);
+    return players_points;
+}
+
+const organizeRank = (players_points) => {
+    players_points.forEach(p =>  delete p.player.dataValues.kills);
+    players_points = players_points.sort((prev, actual) => (actual.points > prev.points) ? 1 : -1);
+}
+
 const findBestPlayer = (players_kills) => {
     const players_points = players_kills.map(player => getPointsInfo(player));
     const best_player = players_points.reduce((prev, current) => (prev.points > current.points) ? prev : current);
@@ -49,5 +61,6 @@ module.exports = {
     findMatchBestPlayer,
     findTeamsBestPlayers,
     findTeam,
-    findTeamsPlayers
+    findTeamsPlayers,
+    findRank
 }
