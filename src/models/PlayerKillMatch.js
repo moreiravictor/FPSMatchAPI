@@ -55,7 +55,7 @@ class PlayerKillMatch extends Model {
         this.belongsTo(models.Match, {foreignKey: 'match_id', targetKey: 'match_id', as: 'matches'});
         this.belongsTo(models.Player, {foreignKey: 'killer_id', targetKey: 'player_id', as: 'killer'});
         this.belongsTo(models.Player, {foreignKey: 'killed_id', targetKey: 'player_id', as: 'killed'});
-        this.belongsTo(models.Kill, {foreignKey: 'kill_id', targetKey: 'kill_id', as: 'kills'});
+        this.belongsTo(models.Kill, {foreignKey: 'kill_id', targetKey: 'kill_id', as: 'kill_type'});
     }
 }
 
