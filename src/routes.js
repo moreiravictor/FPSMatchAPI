@@ -12,6 +12,7 @@ routes.get('/teams', TeamsController.getTeamDomains);
 routes.get('/kills', KillController.getKillPoints);
 
 routes.get('/match/best_player/:match_id', PlayerTeamMatchController.getMatchBestPlayer);
-routes.get('/match/team/best_player/:match_id', PlayerTeamMatchController.getMatchTeamsBestPlayers);
+routes.get('/match/teams/best_player/:match_id', PlayerTeamMatchController.getMatchTeamsBestPlayers);
+routes.get('/match/teams/:match_id', PlayerTeamMatchController.getMatchTeams);
 
 module.exports = routes;

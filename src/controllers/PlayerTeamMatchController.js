@@ -8,6 +8,10 @@ module.exports = {
     async getMatchTeamsBestPlayers(req, res) {
         const best_players = await PlayerTeamMatchService.findTeamsBestPlayers(req.params);
         return res.json(best_players);
+    },
+    async getMatchTeams(req, res) {
+        const teams = await PlayerTeamMatchService.findTeamPlayers(req.params);
+        return res.json(teams);
     }
 
 };

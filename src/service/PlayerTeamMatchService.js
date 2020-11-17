@@ -20,6 +20,13 @@ async function findTeamsBestPlayers(params) {
     return {counter_terrorists: best_player_CT , terrorists: best_player_TR};
 }
 
+async function findTeamPlayers(params) {
+    const { match_id } = params;
+    const players_CT = (await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.teamPlayers(match_id, 1))).map(p => p.player_data);
+    const players_TR = (await PlayerTeamMatch.findAll(PlayerTeamMatchQuery.teamPlayers(match_id, 2))).map(p => p.player_data);
+    return {counter_terrorists: players_CT , terrorists: players_TR};
+}
+
 const findBestPlayer = (players_kills) => {
     const players_points = players_kills.map(player => getPointsInfo(player));
     const best_player = players_points.reduce((prev, current) => (prev.points > current.points) ? prev : current);
@@ -39,5 +46,6 @@ function sumPoints(kills) {
 }
 module.exports = {
     findMatchBestPlayer,
-    findTeamsBestPlayers
+    findTeamsBestPlayers,
+    findTeamPlayers
 }
