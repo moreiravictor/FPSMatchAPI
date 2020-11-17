@@ -15,6 +15,11 @@ module.exports = {
         const { match_id } = req.params;
         const teams = await PlayerTeamMatchService.findTeamsPlayers(match_id);
         return res.json(teams);
+    },
+    async getRank(req, res) {
+        const { match_id } = req.params;
+        const rank = await PlayerTeamMatchService.findRank(match_id);
+        return res.json(rank);
     }
 
 };
